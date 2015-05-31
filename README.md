@@ -1,7 +1,7 @@
 # 52°North SOS [![OpenHUB](https://www.openhub.net/p/SensorObservationService/widgets/project_thin_badge.gif)](https://www.openhub.net/p/SensorObservationService)
 README file for the 52°North Sensor Observation Service (SOS) version 4.3
 
-This is the repository of the [52°North Sensor Observation Service (SOS)][1].
+This is the repository of the [Aquatic Informatics LAWA Fork of 52°North Sensor Observation Service (SOS)][1].
 
 The 52°North SOS is a reference implementation of the
 [OGC Sensor Observation Service specification (version 2.0)][2]. It was
