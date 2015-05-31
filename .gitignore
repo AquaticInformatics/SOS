@@ -10,4 +10,7 @@ pom.xml.next
 release.properties
 .externalToolBuilders
 extensions/do/core/configuration.db
+
 **.*~
+*.iml
+.idea
