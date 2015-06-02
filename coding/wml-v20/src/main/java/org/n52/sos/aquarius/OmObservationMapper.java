@@ -34,14 +34,14 @@ import org.slf4j.LoggerFactory;
 public class OmObservationMapper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OmObservationMapper.class);
-    private static final String SEPARATOR_CHARACTER = "_";
     private static final String DEFAULT_AQUARIUS_INTERPOLATION_TYPE = InterpolationTypeMapper.INSTANTANEOUS;
     private static final String BASE_LOGGER_INTERPOLATION_MAPPING_WARNING =
             "Could not determine aquarius interpolation type";
     private final InterpolationTypeMapper interpolationTypeMapper;
     private final ObservedPropertyMapper observedPropertyMapper;
 
-    public OmObservationMapper(InterpolationTypeMapper interpolationTypeMapper,
+    public OmObservationMapper(
+            InterpolationTypeMapper interpolationTypeMapper,
             ObservedPropertyMapper observedPropertyMapper) {
         this.interpolationTypeMapper = interpolationTypeMapper;
         this.observedPropertyMapper = observedPropertyMapper;
@@ -50,23 +50,16 @@ public class OmObservationMapper {
     public String toInterpolationTypeTitle(OmObservation observation) {
         String wml2InterpolationTitle = interpolationTypeMapper.toTitle(DEFAULT_AQUARIUS_INTERPOLATION_TYPE);
 
-        if (null != observation && null != observation.getObservationConstellation() &&
-                null != observation.getObservationConstellation().getObservableProperty()) {
+        final String observedPropertyIdentifier = getObservedPropertyIdentifier(observation);
 
-            final String observedPropertyIdentifier =
-                    observation.getObservationConstellation().getObservableProperty().getIdentifier();
+        final String title = interpolationTypeMapper.toTitle(
+                observedPropertyMapper.toInterpolationTypeName(observedPropertyIdentifier));
 
-            final String title = interpolationTypeMapper.toTitle(
-                    observedPropertyMapper.toInterpolationTypeName(observedPropertyIdentifier));
-
-            if (null != title) {
-                wml2InterpolationTitle = title;
-            } else {
-                LOGGER.info(BASE_LOGGER_INTERPOLATION_MAPPING_WARNING +
-                        ": invalid identifier {}", observedPropertyIdentifier);
-            }
+        if (null != title) {
+            wml2InterpolationTitle = title;
         } else {
-            LOGGER.info(BASE_LOGGER_INTERPOLATION_MAPPING_WARNING + ": invalid observation");
+            LOGGER.info(BASE_LOGGER_INTERPOLATION_MAPPING_WARNING +
+                    ": invalid identifier {}", observedPropertyIdentifier);
         }
 
         return wml2InterpolationTitle;
@@ -75,26 +68,30 @@ public class OmObservationMapper {
     public String toInterpolationTypeHref(final OmObservation observation) {
         String wml2InterpolationHref = interpolationTypeMapper.toHref(DEFAULT_AQUARIUS_INTERPOLATION_TYPE);
 
+        final String observedPropertyIdentifier = getObservedPropertyIdentifier(observation);
+
+        final String href = interpolationTypeMapper.toHref(
+                observedPropertyMapper.toInterpolationTypeName(observedPropertyIdentifier));
+
+        if (null != href) {
+            wml2InterpolationHref = href;
+        } else {
+            LOGGER.info(BASE_LOGGER_INTERPOLATION_MAPPING_WARNING +
+                    ": invalid identifier {}", observedPropertyIdentifier);
+        }
+        return wml2InterpolationHref;
+    }
+
+    private String getObservedPropertyIdentifier(OmObservation observation) {
+
         if (null != observation && null != observation.getObservationConstellation() &&
                 null != observation.getObservationConstellation().getObservableProperty()) {
 
-
-            final String observedPropertyIdentifier =
-                    observation.getObservationConstellation().getObservableProperty().getIdentifier();
-
-            final String href = interpolationTypeMapper.toHref(
-                    observedPropertyMapper.toInterpolationTypeName(observedPropertyIdentifier));
-
-            if (null != href) {
-                wml2InterpolationHref = href;
-            } else {
-                LOGGER.info(BASE_LOGGER_INTERPOLATION_MAPPING_WARNING +
-                        ": invalid identifier {}", observedPropertyIdentifier);
-            }
+            return observation.getObservationConstellation().getObservableProperty().getIdentifier();
         } else {
             LOGGER.info(BASE_LOGGER_INTERPOLATION_MAPPING_WARNING + ": invalid observation");
+            return null;
         }
-        return wml2InterpolationHref;
     }
 
 }

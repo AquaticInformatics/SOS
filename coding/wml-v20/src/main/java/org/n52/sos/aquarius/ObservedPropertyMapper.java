@@ -54,9 +54,12 @@ public class ObservedPropertyMapper {
         OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP.put("Stage_MonthMedian", InterpolationTypeMapper.AVERAGE_PREC);
         OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP.put("Stage_MonthMinimum", InterpolationTypeMapper.AVERAGE_PREC);
         OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP.put("Take Volume_TotalMeteredUse", InterpolationTypeMapper.TOTAL_PREC);
-        OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP.put("Water Use Allocation_TotalConsented", InterpolationTypeMapper.TOTAL_PREC);
-        OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP.put("Water Use Allocation_TotalMetered", InterpolationTypeMapper.TOTAL_PREC);
-        OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP.put("Water Use Allocation_TotalMeteredUse", InterpolationTypeMapper.TOTAL_PREC);
+        OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP
+                .put("Water Use Allocation_TotalConsented", InterpolationTypeMapper.TOTAL_PREC);
+        OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP
+                .put("Water Use Allocation_TotalMetered", InterpolationTypeMapper.TOTAL_PREC);
+        OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP
+                .put("Water Use Allocation_TotalMeteredUse", InterpolationTypeMapper.TOTAL_PREC);
     }
 
     public String toInterpolationTypeName(String observedPropertyName) {
@@ -66,5 +69,4 @@ public class ObservedPropertyMapper {
             return OBSERVED_PROPERTY_INTERPOLATION_TYPE_MAP.get(observedPropertyName);
         }
     }
-
 }
