@@ -32,14 +32,15 @@ import java.util.Map;
 
 public class InterpolationTypeMapper {
 
-    private static final Map<String, String> WML2_INTERPOLATION_TYPE_HREF_MAP;
+    static final String INSTANTANEOUS = "Instantaneous";
+    static final String DISCRETE = "Discrete";
+    static final String AVERAGE_PREC = "AveragePrec";
+    static final String AVERAGE_SUCC = "AverageSucc";
+    static final String INSTANT_TOTAL = "InstantTotal";
+    static final String TOTAL_PREC = "TotalPrec";
 
-    public static final String INSTANTANEOUS = "Instantaneous";
-    public static final String DISCRETE = "Discrete";
-    public static final String AVERAGE_PREC = "AveragePrec";
-    public static final String AVERAGE_SUCC = "AverageSucc";
-    public static final String INSTANT_TOTAL = "InstantTotal";
-    public static final String TOTAL_PREC = "TotalPrec";
+    private static final Map<String, String> WML2_INTERPOLATION_TYPE_HREF_MAP;
+    private static final Map<String, String> WML2_INTERPOLATION_TYPE_TITLE_MAP;
 
     static {
         WML2_INTERPOLATION_TYPE_HREF_MAP = new HashMap<>();
@@ -55,11 +56,7 @@ public class InterpolationTypeMapper {
                 "http://www.opengis.net/def/waterml/2.0/interpolationType/InstantTotal");
         WML2_INTERPOLATION_TYPE_HREF_MAP.put(TOTAL_PREC,
                 "http://www.opengis.net/def/waterml/2.0/interpolationType/TotalPrec");
-    }
 
-    private static final Map<String, String> WML2_INTERPOLATION_TYPE_TITLE_MAP;
-
-    static {
         WML2_INTERPOLATION_TYPE_TITLE_MAP = new HashMap<>();
         WML2_INTERPOLATION_TYPE_TITLE_MAP.put(INSTANTANEOUS, "Continuous");
         WML2_INTERPOLATION_TYPE_TITLE_MAP.put(DISCRETE, "Discontinuous");

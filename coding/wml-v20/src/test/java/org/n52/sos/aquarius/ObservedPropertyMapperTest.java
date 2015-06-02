@@ -27,6 +27,14 @@
  */
 package org.n52.sos.aquarius;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 public class ObservedPropertyMapperTest {
-    //TODO AI: add
+
+    @Test
+    public void toInterpolationTypeName() {
+        String interpolationType = new ObservedPropertyMapper().toInterpolationTypeName("Discharge_DayMean");
+        Assert.assertEquals("AveragePrec", interpolationType);
+    }
 }

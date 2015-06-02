@@ -27,68 +27,59 @@
  */
 package org.n52.sos.aquarius;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.n52.sos.ogc.om.OmObservableProperty;
+import org.n52.sos.ogc.om.OmObservation;
+import org.n52.sos.ogc.om.OmObservationConstellation;
+
 public class OmObservationMapperTest {
 
-    // TODO AI: proper mocking, update, compile
-    /*
     @Test
-    public void toInterpolationTypeHref_withObservationWithProcedureIdentifier_returnsExpectedHref() {
+    public void toInterpolationTypeHref_withObservedPropertyIdentifier_returnsExpectedHref() {
 
         String identifier = "Discharge_DayMean";
         String expectedHref = "http://www.opengis.net/def/waterml/2.0/interpolationType/AveragePrec";
 
-        // InterpolationTypeMapper interpolationTypeMapper = Mockito.mock(InterpolationTypeMapper.class);
-        // Mockito.when(interpolationTypeMapper.toHref(Mockito.anyString()))
-        //        .thenReturn(expectedHref);
-
-        OmObservationMapper omObservationMapper = new OmObservationMapper(new InterpolationTypeMapper(), new ObservedPropertyMapper());
+        OmObservationMapper omObservationMapper =
+                new OmObservationMapper(new InterpolationTypeMapper(), new ObservedPropertyMapper());
         String href = omObservationMapper.toInterpolationTypeHref(makeOmObservation(identifier));
 
         Assert.assertEquals(expectedHref, href);
     }
 
     @Test
-    public void toInterpolationTypeHref_withObservationWithInvalidProcedureIdentifier_returnsDefaultHref() {
+    public void toInterpolationTypeHref_withUnknownObservedPropertyIdentifier_returnsDefaultHref() {
 
-        String identifier = "InstantTotal";
+        String identifier = "UnknownObservedPropertyIdentifier";
         String expectedHref = "http://www.opengis.net/def/waterml/2.0/interpolationType/Continuous";
 
-        // InterpolationTypeMapper interpolationTypeMapper = Mockito.mock(InterpolationTypeMapper.class);
-        // Mockito.when(interpolationTypeMapper.toHref(Mockito.anyString()))
-        //        .thenReturn(expectedHref);
-
-        OmObservationMapper omObservationMapper = new OmObservationMapper(new InterpolationTypeMapper(), new ObservedPropertyMapper());
+        OmObservationMapper omObservationMapper =
+                new OmObservationMapper(new InterpolationTypeMapper(), new ObservedPropertyMapper());
         String href = omObservationMapper.toInterpolationTypeHref(makeOmObservation(identifier));
 
         Assert.assertEquals(expectedHref, href);
     }
 
     @Test
-    public void toInterpolationTypeHref_withProcedureIdentifierWithMultipleUnderscores_returnsDefaultHref() {
+    public void toInterpolationTypeTitle_withObservedPropertyIdentifier_returnsExpectedTitle() {
+        String identifier = "Stage_MonthMedian";
+        String expectedTitle = "AveragePrec";
 
-        String identifier = "abc_123_InstantTotal";
-        String expectedHref = "http://www.opengis.net/def/waterml/2.0/interpolationType/InstantTotal";
+        OmObservationMapper omObservationMapper =
+                new OmObservationMapper(new InterpolationTypeMapper(), new ObservedPropertyMapper());
+        String title = omObservationMapper.toInterpolationTypeTitle(makeOmObservation(identifier));
 
-        // InterpolationTypeMapper interpolationTypeMapper = Mockito.mock(InterpolationTypeMapper.class);
-        // Mockito.when(interpolationTypeMapper.toHref(Mockito.anyString()))
-        //        .thenReturn(expectedHref);
-
-        OmObservationMapper omObservationMapper = new OmObservationMapper(new InterpolationTypeMapper(), new ObservedPropertyMapper());
-        String href = omObservationMapper.toInterpolationTypeHref(makeOmObservation(identifier));
-
-        Assert.assertEquals(expectedHref, href);
+        Assert.assertEquals(expectedTitle, title);
     }
 
     @Test
-    public void toInterpolationTypeTitle_withObservationWithProcedureIdentifier_returnsExpectedHref() {
-        String identifier = "abc123_InstantTotal";
-        String expectedTitle = "InstantTotal";
+    public void toInterpolationTypeTitle_withUnknownObservedPropertyIdentifier_returnsDefaultTitle() {
+        String identifier = "UnknownObservedPropertyIdentifier";
+        String expectedTitle = "Continuous";
 
-        // InterpolationTypeMapper interpolationTypeMapper = Mockito.mock(InterpolationTypeMapper.class);
-        // Mockito.when(interpolationTypeMapper.toHref(Mockito.anyString()))
-        //        .thenReturn(expectedHref);
-
-        OmObservationMapper omObservationMapper = new OmObservationMapper(new InterpolationTypeMapper(), new ObservedPropertyMapper());
+        OmObservationMapper omObservationMapper =
+                new OmObservationMapper(new InterpolationTypeMapper(), new ObservedPropertyMapper());
         String title = omObservationMapper.toInterpolationTypeTitle(makeOmObservation(identifier));
 
         Assert.assertEquals(expectedTitle, title);
@@ -102,5 +93,4 @@ public class OmObservationMapperTest {
         observation.setObservationConstellation(omObservationConstellation);
         return observation;
     }
-*/
 }
