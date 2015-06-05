@@ -91,9 +91,9 @@ import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * Hibernate data access class for series observations
- * 
+ *
  * @since 4.0.0
- * 
+ *
  */
 public class SeriesObservationDAO extends AbstractObservationDAO {
 
@@ -101,7 +101,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Create series observation query criteria for series and offerings
-     * 
+     *
      * @param clazz
      *            Class to query
      * @param series
@@ -122,7 +122,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Create series observation query criteria for series
-     * 
+     *
      * @param Class
      *            to query
      * @param series
@@ -191,7 +191,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Query series observation for series and offerings
-     * 
+     *
      * @param series
      *            Series to get values for
      * @param offerings
@@ -209,7 +209,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Query series obserations for series, temporal filter, and offerings
-     * 
+     *
      * @param series
      *            Series to get values for
      * @param offerings
@@ -231,7 +231,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Query first/latest series obserations for series (and offerings)
-     * 
+     *
      * @param series
      *            Series to get values for
      * @param offerings
@@ -253,7 +253,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Query series observations for GetObservation request and features
-     * 
+     *
      * @param request
      *            GetObservation request
      * @param features
@@ -271,7 +271,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
     /**
      * Query series observations {@link ScrollableResults} for GetObservation
      * request and features
-     * 
+     *
      * @param request
      *            GetObservation request
      * @param features
@@ -289,7 +289,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
     /**
      * Query series observations for GetObservation request, features, and a
      * filter criterion (typically a temporal filter)
-     * 
+     *
      * @param request
      *            GetObservation request
      * @param features
@@ -310,7 +310,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
     /**
      * Query series observations {@link ScrollableResults} for GetObservation
      * request, features, and a filter criterion (typically a temporal filter)
-     * 
+     *
      * @param request
      *            GetObservation request
      * @param features
@@ -331,7 +331,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
     /**
      * Query series observations for GetObservation request, features, and an
      * indeterminate time (first/latest)
-     * 
+     *
      * @param request
      *            GetObservation request
      * @param features
@@ -355,7 +355,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
      * (first/latest). This method is private and accepts all possible arguments
      * for request-based getSeriesObservationFor. Other public methods overload
      * this method with sensible combinations of arguments.
-     * 
+     *
      * @param request
      *            GetObservation request
      * @param features
@@ -383,7 +383,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
      * (first/latest). This method is private and accepts all possible arguments
      * for request-based getSeriesObservationFor. Other public methods overload
      * this method with sensible combinations of arguments.
-     * 
+     *
      * @param request
      *            GetObservation request
      * @param features
@@ -411,7 +411,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
      * possible arguments for request-based getSeriesObservationFor. Other
      * public methods overload this method with sensible combinations of
      * arguments.
-     * 
+     *
      * @param request
      *            GetObservation request
      * @param features
@@ -430,7 +430,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
             throws OwsExceptionReport {
         final Criteria c =
                 getDefaultObservationCriteria(SeriesObservation.class, session);
-        
+
         String seriesAlias = createSeriesAliasAndRestrictions(c);
 
         checkAndAddSpatialFilteringProfileCriterion(c, request, session);
@@ -499,13 +499,13 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Add an indeterminate time restriction to a criteria for series support.
-     * 
-     * 
+     *
+     *
      * This allows for multiple results if more than one observation has the
      * extrema time (max for latest, min for first). Note: use this method
      * *after* adding all other applicable restrictions so that they will apply
      * to the min/max observation time determination.
-     * 
+     *
      * @param c
      *            Criteria to add the restriction to
      * @param sosIndeterminateTime
@@ -529,7 +529,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
     /**
      * Check if {@link Series} contains first or last timestamp for
      * {@link SosIndeterminateTime}.
-     * 
+     *
      * @param indetTime
      *            {@link SosIndeterminateTime} to check
      * @param series
@@ -548,7 +548,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Get the first or last timestamp from {@link Series}
-     * 
+     *
      * @param indetTime
      *            {@link SosIndeterminateTime} to get timestamp for
      * @param series
@@ -566,7 +566,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Query the min time from series observations for series
-     * 
+     *
      * @param series
      *            Series to get values for
      * @param session
@@ -585,7 +585,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Query the max time from series observations for series
-     * 
+     *
      * @param series
      *            Series to get values for
      * @param session
@@ -604,7 +604,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Create criteria to query min/max time for series from series observation
-     * 
+     *
      * @param series
      *            Series to get values for
      * @param list
@@ -627,7 +627,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Get the result times for this series, offerings and filters
-     * 
+     *
      * @param series
      *            Timeseries to get result times for
      * @param offerings
@@ -732,7 +732,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
                                 observationIdentifiers.getObservableProperty(), observationIdentifiers.getProcedure(),
                                 session);
         ((SeriesObservation) hObservation).setSeries(series);
-        seriesDAO.updateSeriesWithFirstLatestValues(series, hObservation, session);
+//        seriesDAO.updateSeriesWithFirstLatestValues(series, hObservation, session);
     }
 
     @Override
@@ -796,7 +796,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Update series observation by setting deleted flag
-     * 
+     *
      * @param series
      *            Series for which the observations should be updated
      * @param deleteFlag
@@ -917,7 +917,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Get the first not deleted observation for the {@link Series}
-     * 
+     *
      * @param series
      *            Series to get observation for
      * @param session
@@ -935,7 +935,7 @@ public class SeriesObservationDAO extends AbstractObservationDAO {
 
     /**
      * Get the last not deleted observation for the {@link Series}
-     * 
+     *
      * @param series
      *            Series to get observation for
      * @param session

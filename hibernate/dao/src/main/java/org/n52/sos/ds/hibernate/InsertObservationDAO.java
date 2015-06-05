@@ -75,7 +75,7 @@ import com.google.common.collect.Table;
 
 /**
  * Implementation of the abstract class AbstractInsertObservationDAO
- * 
+ *
  * @since 4.0.0
  *
  */
@@ -86,7 +86,7 @@ public class InsertObservationDAO extends AbstractInsertObservationDAO {
 
     private final FeatureOfInterestDAO featureOfInterestDAO = new FeatureOfInterestDAO();
 
-    private static final int FLUSH_THRESHOLD = 50;
+    private static final int FLUSH_THRESHOLD = 10;
 
     private static final String CONSTRAINT_OBSERVATION_IDENTITY = "observationIdentity";
 
@@ -255,7 +255,7 @@ public class InsertObservationDAO extends AbstractInsertObservationDAO {
     }
 
     private void checkEqualsAndThrow(String constraintName, HibernateException he) throws OwsExceptionReport {
-        if (StringHelper.isNotEmpty(constraintName)) { 
+        if (StringHelper.isNotEmpty(constraintName)) {
             String exceptionMsg = null;
             if (constraintName.equalsIgnoreCase(CONSTRAINT_OBSERVATION_IDENTITY)) {
                 exceptionMsg = "Observation with same values already contained in database";
@@ -270,7 +270,7 @@ public class InsertObservationDAO extends AbstractInsertObservationDAO {
     }
 
     private void checkContainsAndThrow(String message, HibernateException he) throws OwsExceptionReport {
-        if (StringHelper.isNotEmpty(message)) { 
+        if (StringHelper.isNotEmpty(message)) {
             String exceptionMsg = null;
             if (message.toLowerCase().contains(CONSTRAINT_OBSERVATION_IDENTITY.toLowerCase())) {
                 exceptionMsg = "Observation with same values already contained in database";
@@ -287,7 +287,7 @@ public class InsertObservationDAO extends AbstractInsertObservationDAO {
     /**
      * Get the hibernate FeatureOfInterest object for an AbstractFeature,
      * returning it from the local cache if already requested
-     * 
+     *
      * @param sosObsConst
      * @param featureCache
      * @param session
