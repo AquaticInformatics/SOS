@@ -31,10 +31,9 @@ package org.n52.sos.binding;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.google.common.collect.Sets;
 import org.apache.xmlbeans.XmlObject;
 import org.n52.sos.coding.OperationKey;
 import org.n52.sos.decode.Decoder;
@@ -50,8 +49,6 @@ import org.n52.sos.util.http.MediaTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.Sets;
-
 /**
  * @since 4.0.0
  *
@@ -59,12 +56,13 @@ import com.google.common.collect.Sets;
 public class PoxBinding extends SimpleBinding {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(PoxBinding.class);
+    private static final int MAX_STRING_LENGTH_LOGGER_INFO = 100;
     private static final Set<String> CONFORMANCE_CLASSES = Collections
             .singleton(ConformanceClasses.SOS_V2_POX_BINDING);
 
     @Override
     public void doPostOperation(HttpServletRequest req,
-                                HttpServletResponse res)
+            HttpServletResponse res)
             throws HTTPException, IOException {
         AbstractServiceRequest<?> sosRequest = null;
         try {
@@ -81,8 +79,14 @@ public class PoxBinding extends SimpleBinding {
     protected AbstractServiceRequest<?> parseRequest(HttpServletRequest request)
             throws OwsExceptionReport {
         XmlObject doc = XmlHelper.parseXmlSosRequest(request);
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("XML-REQUEST: {}", doc.xmlText());
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("XML-REQUEST: {}", doc.xmlText());
+        } else if (LOGGER.isDebugEnabled()) {
+            String xmlText = doc.xmlText();
+            if (xmlText != null) {
+                LOGGER.debug("Partial XML-REQUEST: {}",
+                        xmlText.substring(0, Math.min(xmlText.length(), MAX_STRING_LENGTH_LOGGER_INFO)));
+            }
         }
         Decoder<AbstractServiceRequest<?>, XmlObject> decoder =
                 getDecoder(CodingHelper.getDecoderKey(doc));
@@ -102,7 +106,7 @@ public class PoxBinding extends SimpleBinding {
     @Override
     public boolean checkOperationHttpPostSupported(OperationKey k) {
         return hasDecoder(k, MediaTypes.TEXT_XML) ||
-               hasDecoder(k, MediaTypes.APPLICATION_XML);
+                hasDecoder(k, MediaTypes.APPLICATION_XML);
     }
 
     @Override
